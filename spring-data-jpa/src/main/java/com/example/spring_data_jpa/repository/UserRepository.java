@@ -57,4 +57,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u.lastname FROM User u WHERE u.id = :id")
     String getLastnameById(@Param("id") Long id);
+
+    @Query("SELECT COUNT(u) FROM User u")
+    Long countUsers();
 }

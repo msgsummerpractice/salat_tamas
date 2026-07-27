@@ -75,4 +75,11 @@ public class UserServiceTest {
         userService.deleteUserByUsername("user1");
         verify(userRepository).deleteByUsername("user1");
     }
+
+    @Test
+    void testCountUsers() {
+        when(userRepository.count()).thenReturn(1L);
+        long count = userRepository.count();
+        assert count == 1;
+    }
 }
