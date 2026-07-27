@@ -14,6 +14,8 @@ import jakarta.transaction.Transactional;
 public interface UserRepository extends JpaRepository<User, Long> {
     
     User findByUsernameOrEmail(String username, String email);
+
+    User getById(Long id);
         
     void deleteByUsername(String username);
 

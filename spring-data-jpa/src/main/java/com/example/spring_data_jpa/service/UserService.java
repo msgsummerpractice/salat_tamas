@@ -1,30 +1,55 @@
 package com.example.spring_data_jpa.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.spring_data_jpa.repository.UserRepository;
+import com.example.spring_data_jpa.DTO.request.UserRequest;
+import com.example.spring_data_jpa.DTO.response.UserResponse;
 import com.example.spring_data_jpa.model.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class UserService {
     
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserResponse createUser(UserRequest request) {
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setFirstname(request.getFirstname());
+        user.setLastname(request.getLastname());
+        user.setCreatedAt(LocalDateTime.now());
+        
+        User savedUser = userRepository.save(user);
+
+        return convertToResponse(savedUser);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserResponse getUserById(Long id) {
+        User user = userRepository.getById(id);
+        return convertToResponse(user);
     }
 
-    public User getUserByUsernameOrEmail(String username, String email) {
-        return userRepository.findByUsernameOrEmail(username, email);
+    public List<UserResponse> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserResponse> userResponses = users.stream()
+                .map(this::convertToResponse)
+                .toList();
+        return userResponses;
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserResponse getUserByUsernameOrEmail(String username, String email) {
+        return convertToResponse(userRepository.findByUsernameOrEmail(username, email));
+    }
+
+    public UserResponse createUser(User user) {
+        return convertToResponse(userRepository.save(user));
     }
 
     public void updateUsername(Long id, String username) {
@@ -73,5 +98,16 @@ public class UserService {
 
     public String getLastnameById(Long id) {
         return userRepository.getLastnameById(id);
+    }
+
+    private UserResponse convertToResponse(User user) {
+        UserResponse response = new UserResponse();
+        response.setId(user.getId());
+        response.setUsername(user.getUsername());
+        response.setEmail(user.getEmail());
+        response.setFirstname(user.getFirstname());
+        response.setLastname(user.getLastname());
+        response.setCreatedAt(user.getCreatedAt());
+        return response;
     }
 }

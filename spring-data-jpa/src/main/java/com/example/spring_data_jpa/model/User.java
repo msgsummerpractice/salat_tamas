@@ -45,4 +45,7 @@ public class User {
 
     @Column(nullable = false, length = 30)
     private String lastname;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private java.time.LocalDateTime createdAt;
 }
