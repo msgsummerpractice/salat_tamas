@@ -9,6 +9,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -85,5 +87,32 @@ public class GlobalExceptionHandler {
                 request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-    }  
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+        public ResponseEntity<ApiErrorResponse> handleAuthorizationDenied(
+                AuthorizationDeniedException ex,
+                HttpServletRequest request) {
+                
+            ApiErrorResponse response = ApiErrorResponse.of(
+                    HttpStatus.FORBIDDEN,
+                    "Access denied",
+                    request.getRequestURI());
+
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        }
+
+        @ExceptionHandler(AccessDeniedException.class)
+        public ResponseEntity<ApiErrorResponse> handleAccessDenied(
+                AccessDeniedException ex,
+                HttpServletRequest request) {
+                
+            ApiErrorResponse response = ApiErrorResponse.of(
+                    HttpStatus.FORBIDDEN,
+                    "Access denied",
+                    request.getRequestURI());
+
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        }
 }
+

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -40,6 +41,7 @@ public class UserController {
     private UserService userService;
     
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Get Users", description = "Retrieve a paginated list of users with optional sorting", tags = {"users", "get", "pagination"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successfully retrieved users", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
@@ -52,6 +54,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Get User by ID", description = "Retrieve a user by their unique ID", tags = {"users", "get"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successfully retrieved user", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
@@ -64,6 +67,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Create User", description = "Create a new user with the provided details", tags = {"users", "post", "create"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "User created successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
@@ -76,6 +80,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Update User", description = "Update an existing user's details by their ID", tags = {"users", "put", "update"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User updated successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
@@ -93,6 +98,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete User", description = "Delete a user by their unique ID", tags = {"users", "delete"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User deleted successfully", content = @Content(mediaType = "application/json")),
@@ -105,6 +111,7 @@ public class UserController {
     }
 
     @PatchMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Update User Information", description = "Update specific information of a user by their ID", tags = {"users", "patch", "update"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User information updated successfully", content = @Content(mediaType = "application/json")),

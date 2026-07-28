@@ -35,7 +35,8 @@ public class UserService {
     }
 
     public UserResponse getUserById(Long id) {
-        User user = userRepository.getById(id);
+        User user = userRepository.findById(id).orElseThrow(
+            () -> new RuntimeException("User not found with id: " + id));
         return convertToResponse(user);
     }
 
@@ -44,7 +45,9 @@ public class UserService {
     }
 
     public UserResponse getUserByUsernameOrEmail(String username, String email) {
-        return convertToResponse(userRepository.findByUsernameOrEmail(username, email));
+        User user = userRepository.findByUsernameOrEmail(username).orElseThrow(
+            () -> new RuntimeException("User not found with username: " + username + " or email: " + email));
+        return convertToResponse(user);
     }
 
     public UserResponse createUser(User user) {
