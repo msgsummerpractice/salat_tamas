@@ -1,12 +1,15 @@
 package com.example.spring_data_jpa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.spring_data_jpa.repository.UserRepository;
 import com.example.spring_data_jpa.DTO.request.UserRequest;
 import com.example.spring_data_jpa.DTO.response.UserResponse;
 import com.example.spring_data_jpa.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +24,7 @@ public class UserService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword((request.getPassword()));
         user.setFirstname(request.getFirstname());
         user.setLastname(request.getLastname());
         user.setCreatedAt(LocalDateTime.now());
@@ -37,11 +40,7 @@ public class UserService {
     }
 
     public List<UserResponse> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        List<UserResponse> userResponses = users.stream()
-                .map(this::convertToResponse)
-                .toList();
-        return userResponses;
+        return getAllUsers(0, 20, "id", "asc").getContent();
     }
 
     public UserResponse getUserByUsernameOrEmail(String username, String email) {
@@ -109,5 +108,15 @@ public class UserService {
         response.setLastname(user.getLastname());
         response.setCreatedAt(user.getCreatedAt());
         return response;
+    }
+
+    public Page<UserResponse> getAllUsers(int page, int size, String sortBy, String direction) {
+        Sort.Direction sortDirection = Sort.Direction.fromOptionalString(direction)
+                .orElse(Sort.Direction.ASC);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+        return userRepository.findAll(pageable)
+                .map(this::convertToResponse);
     }
 }
