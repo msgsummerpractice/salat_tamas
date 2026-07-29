@@ -1,0 +1,17 @@
+#app-container {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+
+.mat-toolbar {
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
+
+a[mat-button] {
+  color: var(--mat-sys-on-primary);
+}
+
+a[mat-icon-button] {
+  color: var(--mat-sys-on-primary);
+}
