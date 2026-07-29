@@ -2,7 +2,10 @@
   id="app-container"
   class="flex mat-bg-surface mat-text-on-surface items-center justify-center flex-col"
 >
-  <mat-toolbar color="primary" class="sticky top-0 z-50 mb-4 w-screen flex items-center justify-between">
+  <mat-toolbar
+    color="primary"
+    class="sticky top-0 z-50 mb-4 w-screen flex items-center justify-between"
+  >
     <span id="left-nav-section" class="flex items-center justify-start">
       <a mat-button class="mr-4" routerLink="/">Home</a>
       <a mat-button class="mr-4" routerLink="/about">About</a>
@@ -23,7 +26,8 @@
       </h1>
       <p class="font-light font-mono w-fit">This is a dog gallery!</p>
     </div>
-    <div id="content-section">
+    <div id="content-section" class="flex flex-col items-center justify-center gap-6">
+      <app-image-viewer class="flex flex-col items-center justify-center"></app-image-viewer>
       <div id="cards-container" class="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
         <div id="card" class="rounded-lg shadow-lg p-4 border">
           <h3 id="breed-name" class="font-semibold font-mono pb-1 text-lg">French Bulldog</h3>
