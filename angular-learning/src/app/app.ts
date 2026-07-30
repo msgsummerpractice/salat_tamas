@@ -3,6 +3,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     RouterLinkActive,
     RouterOutlet,
+    CapitalizePipe,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
