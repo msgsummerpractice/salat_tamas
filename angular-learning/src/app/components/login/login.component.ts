@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MockLoginButtonComponent } from './mock-login-button.component';
+import { LoginFormComponent } from './login-form.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [MockLoginButtonComponent],
+  imports: [LoginFormComponent],
 })
 export class LoginComponent {}
