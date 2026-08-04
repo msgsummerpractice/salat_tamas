@@ -1,0 +1,5 @@
+Day - 2
+Created initial webapp configuration for my application in Azure
+- /api/users should only be accessable by authenticated users
+- set up fallback route
+- did day 2 exercises until Docker setup
