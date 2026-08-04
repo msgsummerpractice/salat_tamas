@@ -42,7 +42,7 @@ jobs:
 
           skip_app_build: true
 
-          app_location: "/angular-learning/dist/angular-learning"
+          app_location: "/angular-learning"
           output_location: ""
           api_location: ""
 
