@@ -67,7 +67,6 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Create User", description = "Create a new user with the provided details", tags = {"users", "post", "create"})
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "User created successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),

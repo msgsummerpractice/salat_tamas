@@ -102,7 +102,7 @@ public class UserService {
         return userRepository.getLastnameById(id);
     }
 
-    private UserResponse convertToResponse(User user) {
+    protected UserResponse convertToResponse(User user) {
         UserResponse response = new UserResponse();
         response.setId(user.getId());
         response.setUsername(user.getUsername());
