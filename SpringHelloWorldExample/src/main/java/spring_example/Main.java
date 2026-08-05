@@ -4,10 +4,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
     public static void main(String[] args) {
-        ApplicationContext context = new
-    ClassPathXmlApplicationContext("beans.xml");
-        HelloWorld obj = (HelloWorld) context.getBean("HelloWorld");
-        obj.getMessage();
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml")) {
+            HelloWorld obj = context.getBean("HelloWorld", HelloWorld.class);
+            obj.printMessage();
+        }
     }
     
 }
