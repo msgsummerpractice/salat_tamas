@@ -2,6 +2,8 @@ package com.example.spring_data_jpa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.example.spring_data_jpa.repository.UserRepository;
 import com.example.spring_data_jpa.DTO.request.UserRequest;
 import com.example.spring_data_jpa.DTO.response.UserResponse;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -36,7 +39,8 @@ public class UserService {
     }
 
     public UserResponse getUserById(Long id) {
-        User user = userRepository.getById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found with id"));
         return convertToResponse(user);
     }
 
