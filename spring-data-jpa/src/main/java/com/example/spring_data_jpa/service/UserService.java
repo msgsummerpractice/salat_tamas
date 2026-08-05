@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.spring_data_jpa.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
+
+import com.example.spring_data_jpa.DTO.request.UpdateUserRequest;
 import com.example.spring_data_jpa.DTO.request.UserRequest;
 import com.example.spring_data_jpa.DTO.response.UserResponse;
 import com.example.spring_data_jpa.model.User;
@@ -23,6 +27,21 @@ public class UserService {
     
     @Autowired
     private UserRepository userRepository;
+
+    @Transactional
+    public UserResponse updateUser(Long id, UpdateUserRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found with id"));
+
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword((request.getPassword()));
+        user.setFirstname(request.getFirstname());
+        user.setLastname(request.getLastname());
+
+        User updatedUser = userRepository.save(user);
+        return convertToResponse(updatedUser);
+    }
 
     public UserResponse createUser(UserRequest request) {
         User user = new User();
