@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,7 +61,7 @@ public class UserService {
     }
 
     public void updatePassword(Long id, String password) {
-        userRepository.updatePasswordById(id, password);
+        userRepository.updatePasswordById(id, new BCryptPasswordEncoder().encode(password));
     }
 
     public void updateFirstname(Long id, String firstname) {
