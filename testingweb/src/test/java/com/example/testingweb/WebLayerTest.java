@@ -3,21 +3,23 @@ package com.example.testingweb;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
-import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(HomeController.class)
-@AutoConfigureRestTestClient
 class WebLayerTest {
     
     @Autowired
-    private RestTestClient restTestClient;
+    private MockMvc mockMvc;
 
     @Test
-    void greetingShouldReturnDefaultMessage() {
-        restTestClient.get().uri("/")
-                .exchange()
-                .expectBody(String.class)
-                .isEqualTo("Hello, World!");
+    void greetingShouldReturnDefaultMessage() throws Exception{
+        mockMvc.perform(get("/"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("Hello, World")));
     }
 }

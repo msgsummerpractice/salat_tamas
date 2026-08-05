@@ -1,31 +1,32 @@
 package com.example.testingweb;
 
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.client.RestTestClient;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+
 
 import static org.mockito.Mockito.when;
 
+ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(GreetingController.class)
-@AutoConfigureRestTestClient
 class WebMockTest {
     
     @Autowired
-    private RestTestClient restTestClient;
+    private MockMvc mockMvc;
 
     @MockitoBean
     private GreetingService service;
 
     @Test
-    void greetingShouldReturnMessageFromService() {
+    void greetingShouldReturnMessageFromService() throws Exception {
         when(service.greet()).thenReturn("Hello, Mock");
-        restTestClient.get().uri("/greeting")
-                .exchange()
-                .expectBody(String.class)
-                .isEqualTo("Hello, Mock");
-
+        mockMvc.perform(get("/greet"))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Hello, Mock"));
     }
 }

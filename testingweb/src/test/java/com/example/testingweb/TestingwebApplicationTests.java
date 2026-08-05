@@ -1,23 +1,32 @@
 package com.example.testingweb;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+ 
 @SpringBootTest
-@AutoConfigureRestTestClient
 class TestingwebApplicationTests {
 
 	@Autowired
-	private RestTestClient restTestClient;
+	private WebApplicationContext context;
 
-	@Test
-	void greetingShouldReturnDefaultMessage() {
-		restTestClient.get().uri("/")
-				.exchange()
-				.expectBody(String.class)
-				.isEqualTo("Hello, World!");
-	}
-
+	private MockMvc mockMvc;
+     @BeforeEach
+     void setUp() {
+         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+     }
+     @Test
+     void greetingShouldReturnDefaultMessage() throws Exception {
+         mockMvc.perform(get("/"))
+             .andExpect(status().isOk())
+             .andExpect(content().string("Hello, World!"));
+     }
 }
