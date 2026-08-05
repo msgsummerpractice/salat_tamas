@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title() }}</title>
+  </head>
+  <body class="bg-taupe-300 min-h-screen h-fit w-full max-w-screen">
+    <div id="app-container" class="flex items-center justify-center flex-col p-4">
+      <div id="title-section" class="flex flex-col items-center justify-center p-4 mb-8 gap-2">
+        <h1
+          id="page-title"
+          class="text-6xl font-mono font-bold tracking-tighter text-taupe-700 text-shadow-lg"
+        >
+          Dog Gallery
+        </h1>
+        <p class="font-light font-mono w-fit">This is a dog gallery!</p>
+      </div>
+      <div id="content-section">
+        <div id="cards-container" class="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-taupe-200 rounded-lg shadow-lg p-4 border border-taupe-500">
+            <h3 class="font-semibold font-mono pb-1 text-lg text-taupe-800">French Bulldog</h3>
+            <p class="font-light font-mono text-taupe-600">
+              The Frenchie shares many of the traits that made its bulldog ancestors so successful
+              in the bull-baiting arena: low center of gravity, wide body, heavy bone, muscular
+              build and large, square head. It has soft loose skin forming wrinkles about the head
+              and shoulders.
+            </p>
+          </div>
+          <div class="bg-taupe-200 rounded-lg shadow-lg p-4 border border-taupe-500">
+            <h3 class="font-semibold font-mono pb-1 text-lg text-taupe-800">Labrador Retriever</h3>
+            <p class="font-light font-mono text-taupe-600">
+              The Labrador Retriever is a medium to large-sized, short-coupled, powerfully-built dog
+              with a short, dense, water-resistant coat; small, drop ears; and a short, thick
+              otter-like tail carried level with the back or with a slight upward curve.
+            </p>
+          </div>
+          <div class="bg-taupe-200 rounded-lg shadow-lg p-4 border border-taupe-500">
+            <h3 class="font-semibold font-mono pb-1 text-lg text-taupe-800">German Shepherd</h3>
+            <p class="font-light font-mono text-taupe-600">
+              The German Shepherds are medium to large-sized dogs, well-balanced, muscular dog,
+              slightly longer than tall, with a medium length coat, erect ears, and a low-set
+              natural tail that normally reaches to the hock and is carried in a slight curve like a
+              saber.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
