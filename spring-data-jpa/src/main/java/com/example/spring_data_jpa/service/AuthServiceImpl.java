@@ -61,10 +61,10 @@ public class AuthServiceImpl implements AuthService {
 
         Set<Role> roles = user.getRoles();
 
-        String token = Jwts.builder()
-                .setSubject(user.getEmail())
-                .claim("roles", roles)
-                .setIssuedAt(new Date())
+String token = Jwts.builder()
+        .setSubject(user.getEmail())
+        .claim("roles", roles.stream().map(r -> r.getName().name()).toList())
+        .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getSigningKey())
                 .compact();
