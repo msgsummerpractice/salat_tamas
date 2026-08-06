@@ -12,5 +12,5 @@ import { ImageViewerComponent } from './components/image-viewer.component';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('angular-learning');
+  protected readonly title = signal('Dog Gallery');
 }

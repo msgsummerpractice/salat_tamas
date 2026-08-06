@@ -7,7 +7,7 @@
         <title>Random Dog Gallery</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <h1>
@@ -15,9 +15,11 @@
         </h1>
 
         <div>
-            <button id="loadRandomDogButton">Show me a dog!</button>
+            <button id="load-button">Show me a dog!</button>
 
-            <div id="imageContainer"></div>
+            <div id="image-container">
+                <span id="loading">Loading...</span>
+            </div>
         </div>
 
         <script src="script.js" async defer></script>
