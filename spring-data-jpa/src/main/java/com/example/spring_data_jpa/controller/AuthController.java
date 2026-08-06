@@ -10,24 +10,26 @@ import com.example.spring_data_jpa.DTO.request.SignInRequest;
 import com.example.spring_data_jpa.DTO.request.UserRequest;
 import com.example.spring_data_jpa.DTO.response.SignInResponse;
 import com.example.spring_data_jpa.DTO.response.UserResponse;
-import com.example.spring_data_jpa.service.AuthServiceImpl;
+import com.example.spring_data_jpa.service.AuthService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final AuthServiceImpl authService;
+    private final AuthService authService;
 
-    public AuthController(AuthServiceImpl authServiceImpl) {
-        this.authService = authServiceImpl;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
     
     @PostMapping("/login")
-    public ResponseEntity<SignInResponse> login(@RequestBody SignInRequest request) {
+    public ResponseEntity<SignInResponse> login(@Valid @RequestBody SignInRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody UserRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 }
