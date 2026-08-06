@@ -22,8 +22,8 @@ typings/
 __screenshots__/
 
 # Angular
-.angular/cache
-src/environments
+!**/.angular/cache
+!**/src/environments
 
 # IDEs and editors
 ### IntelliJ IDEA ###
@@ -70,7 +70,7 @@ Thumbs.db
 /libpeerconnection.log
 
 # Secrets
-src/main/resources/env.properties
+!**/src/main/resources/env.properties
 
 # Docs
 HELP.md
