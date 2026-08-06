@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, catchError, throwError, timeout } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable, map, catchError, throwError, timeout } from 'rxjs';
 })
 export class ImageService {
   private apiUrl = 'https://dog.ceo/api/breeds/image/random';
-  constructor(private http: HttpClient) {}
+  http = inject(HttpClient);
 
   fetchRandomDogImage(): Observable<string> {
     return this.http.get<{ message: string; status: string }>(this.apiUrl).pipe(

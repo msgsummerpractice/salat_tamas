@@ -1,0 +1,12 @@
+img {
+        max-width: 100%;
+        height: auto;
+        max-height: 300px;
+        border-radius: 8px;
+      }
+
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
