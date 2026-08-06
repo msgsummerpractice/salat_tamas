@@ -1,6 +1,6 @@
 import { Directive, effect, inject, input, TemplateRef, ViewContainerRef } from '@angular/core';
 
-@Directive({ selector: `[appIfAuth]` })
+@Directive({ selector: `[appIfAuth]`, standalone: true })
 export class IfAuthDirective {
   private readonly _viewContainerRef = inject(ViewContainerRef);
   private readonly _templateRef = inject(TemplateRef);

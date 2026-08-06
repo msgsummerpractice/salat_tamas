@@ -7,6 +7,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     MatToolbarModule,
     MatButtonModule,

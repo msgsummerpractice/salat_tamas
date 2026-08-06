@@ -4,6 +4,7 @@ import { ShortenPipe } from '../../pipes/shorten.pipe';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [ImageViewerComponent, ShortenPipe],
   templateUrl: './home.component.html',
   styleUrls: ['../../app.css', './home.component.css'],
