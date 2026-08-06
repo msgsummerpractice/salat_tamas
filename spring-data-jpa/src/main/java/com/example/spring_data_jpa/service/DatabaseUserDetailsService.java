@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.spring_data_jpa.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class DatabaseUserDetailsService implements UserDetailsService {
         
@@ -21,6 +23,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         var user = userRepository.findByUsernameOrEmail(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + login));

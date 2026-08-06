@@ -11,10 +11,10 @@ export class AuthService {
   private router = inject(Router);
 
   token = signal<string | null>(localStorage.getItem('token'));
-  role = signal<string | null>(localStorage.getItem('role'));
+  roles = signal<string | null>(localStorage.getItem('roles'));
 
   isLoggedIn = computed(() => !!this.token());
-  isAdmin = computed(() => this.role() === 'ADMIN');
+  isAdmin = computed(() => this.roles()?.includes('ADMIN') ?? false);
 
   login(request: SignInRequest) {
     return this.http.post<SignInResponse>('/api/auth/login', request);
@@ -22,9 +22,12 @@ export class AuthService {
 
   setSession(res: SignInResponse) {
     localStorage.setItem('token', res.token);
-    localStorage.setItem('role', res.role.name);
+    const roleNames = Array.from(res.roles)
+      .map((role) => role.name)
+      .join(',');
+    localStorage.setItem('roles', roleNames);
     this.token.set(res.token);
-    this.role.set(res.role.name);
+    this.roles.set(roleNames);
   }
 
   register(request: UserRequest) {
@@ -35,7 +38,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.token.set(null);
-    this.role.set(null);
+    this.roles.set(null);
     this.router.navigate(['/login']);
   }
 }

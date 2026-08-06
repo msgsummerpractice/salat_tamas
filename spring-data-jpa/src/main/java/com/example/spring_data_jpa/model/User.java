@@ -11,6 +11,7 @@ import lombok.ToString;
 import java.util.Set;
 import java.util.HashSet;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.Column;
@@ -24,6 +25,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.JoinColumn;
 import lombok.AccessLevel;
 
@@ -35,7 +37,10 @@ import lombok.AccessLevel;
 @Setter
 @Entity
 @Builder
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "username"),
+    @UniqueConstraint(columnNames = "email"),
+})
 public class User {
     
     @Id

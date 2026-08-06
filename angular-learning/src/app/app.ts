@@ -17,6 +17,9 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     RouterOutlet,
     CapitalizePipe,
   ],
+  host: {
+    class: 'block mt-0 pt-0',
+  },
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

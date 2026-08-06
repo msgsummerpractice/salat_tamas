@@ -17,7 +17,7 @@ export interface Role {
 
 export interface SignInResponse {
   token: string;
-  role: Role;
+  roles: Set<Role>;
 }
 
 export interface UserResponse {
@@ -26,6 +26,6 @@ export interface UserResponse {
   username: string;
   firstname: string;
   lastname: string;
-  role: Role;
+  roles: Set<Role>;
   createdAt: string;
 }
