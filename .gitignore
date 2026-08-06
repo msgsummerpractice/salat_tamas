@@ -3,7 +3,8 @@ dist/
 out-tsc/
 bazel-out/
 build/
-target/
+**/target/
+**/target
 **/target/**
 !**/src/main/**/build/
 !**/src/main/**/target/
@@ -22,8 +23,8 @@ typings/
 __screenshots__/
 
 # Angular
-!**/.angular/cache
-!**/src/environments
+**/.angular/cache
+**/src/environments
 
 # IDEs and editors
 ### IntelliJ IDEA ###
@@ -70,7 +71,9 @@ Thumbs.db
 /libpeerconnection.log
 
 # Secrets
-!**/src/main/resources/env.properties
+**/env.properties
+**/application-dev.properties
+**/application-prod.properties
 
 # Docs
 HELP.md
