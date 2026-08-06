@@ -1,0 +1,40 @@
+<div id="home-container" class="flex flex-col items-center justify-between p-4">
+  <div id="title-section" class="flex flex-col items-center justify-center p-4 mb-8 gap-2">
+    <h1 id="page-title" class="text-6xl font-mono font-bold tracking-tighter text-shadow-lg">
+      Dog Gallery
+    </h1>
+    <p class="font-light font-mono w-fit">This is a dog gallery!</p>
+  </div>
+  <div id="content-section" class="flex flex-col items-center justify-center gap-6">
+    <app-image-viewer class="flex flex-col items-center justify-center"></app-image-viewer>
+    <div id="cards-container" class="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="rounded-lg shadow-lg p-4 border">
+        <h3 class="font-semibold font-mono pb-1 text-lg">French Bulldog</h3>
+        <p class="font-light font-mono">
+          {{
+            'The Frenchie shares many of the traits that made its bulldog ancestors so successful in the bull-baiting arena: low center of gravity, wide body, heavy bone, muscular build and large, square head. It has soft loose skin forming wrinkles about the head and shoulders.'
+              | shorten: 250
+          }}
+        </p>
+      </div>
+      <div id="card" class="rounded-lg shadow-lg p-4 border">
+        <h3 id="breed-name" class="font-semibold font-mono pb-1 text-lg">Labrador Retriever</h3>
+        <p id="breed-description" class="font-light font-mono">
+          {{
+            'The Labrador Retriever is a medium to large-sized, short-coupled, powerfully-built dog with a short, dense, water-resistant coat; small, drop ears; and a short, thick otter-like tail carried level with the back or with a slight upward curve.'
+              | shorten: 250
+          }}
+        </p>
+      </div>
+      <div id="card" class="rounded-lg shadow-lg p-4 border">
+        <h3 id="breed-name" class="font-semibold font-mono pb-1 text-lg">German Shepherd</h3>
+        <p id="breed-description" class="font-light font-mono">
+          {{
+            'The German Shepherds are medium to large-sized dogs, well-balanced, muscular dog, slightly longer than tall, with a medium length coat, erect ears, and a low-set natural tail that normally reaches to the hock and is carried in a slight curve like a saber.'
+              | shorten: 250
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
