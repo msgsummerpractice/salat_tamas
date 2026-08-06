@@ -1,0 +1,31 @@
+<div class="flex flex-col items-center justify-center gap-4 min-w-40">
+      <button
+        mat-raised-button
+        (click)="loadImage()"
+        [disabled]="loading()"
+        class="flex items-center gap-2"
+      >
+        @if (loading()) {
+          <mat-progress-spinner
+            mode="indeterminate"
+            diameter="18"
+            strokeWidth="3"
+            class="w-full"
+          ></mat-progress-spinner>
+        } @else {
+          <span class="w-full">Load Image</span>
+        }
+      </button>
+
+      <div class="flex flex-col items-center justify-center gap-4">
+        @if (imageUrl() && !loading()) {
+          <div>
+            <img [src]="imageUrl()" alt="Random dog image" />
+          </div>
+        }
+
+        @if (error()) {
+          <div>{{ error() }}</div>
+        }
+      </div>
+    </div>
