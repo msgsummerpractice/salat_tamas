@@ -1,8 +1,7 @@
 # Compiled output
-/dist
-/dist/
-/out-tsc
-/bazel-out
+dist/
+out-tsc/
+bazel-out/
 build/
 target/
 **/target/**
@@ -12,18 +11,18 @@ target/
 !**/src/test/**/target/
 
 # Node
-/node_modules
+node_modules/
 npm-debug.log
 yarn-error.log
 testem.log
-/connect.lock
-/coverage
-/tmp
-/typings
-/__screenshots__/
+connect.lock
+coverage/
+tmp/
+typings/
+__screenshots__/
 
 # Angular
-/.angular/cache
+.angular/cache
 src/environments
 
 # IDEs and editors
@@ -45,10 +44,10 @@ src/environments
 .sts4-cache
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/nbdist/
-/.nb-gradle/
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
 
 ### VS Code ###
 .vscode/
