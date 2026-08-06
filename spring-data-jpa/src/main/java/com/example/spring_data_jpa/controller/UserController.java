@@ -88,11 +88,7 @@ public class UserController {
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,@Valid @RequestBody UpdateUserRequest request) {
-        userService.updateUsername(id, request.getUsername());
-        userService.updateEmail(id, request.getEmail());
-        userService.updatePassword(id, request.getPassword());
-        userService.updateFirstname(id, request.getFirstname());
-        userService.updateLastname(id, request.getLastname());
+        userService.updateUser(id, request);
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
