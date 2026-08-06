@@ -3,8 +3,6 @@ import {
   FormControl,
   NonNullableFormBuilder,
   Validators,
-  FormBuilder,
-  FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,6 +15,7 @@ type LoginForm = {
 
 @Component({
   selector: 'app-login-form',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login-form.component.html',
 })
