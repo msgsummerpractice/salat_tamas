@@ -73,10 +73,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserResponse register(UserRequest request) {
-        if(userRepository.findByUsernameOrEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email or Username is already in use");
-        }
+if (userRepository.findByUsername(request.getUsername()).isPresent()
+        || userRepository.findByUsernameOrEmail(request.getEmail()).isPresent()) {
+    throw new RuntimeException("Email or Username is already in use");
+}
 
         User user = User.builder()
                 .username(request.getUsername())
