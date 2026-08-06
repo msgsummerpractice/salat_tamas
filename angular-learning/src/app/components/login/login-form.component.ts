@@ -7,6 +7,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 type LoginForm = {
   email: FormControl<string>;
@@ -20,6 +22,8 @@ type LoginForm = {
 })
 export class LoginFormComponent {
   private readonly _formBuilder = inject(NonNullableFormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   protected readonly loginFormGroup = this._formBuilder.group<LoginForm>({
     email: this._formBuilder.control('', [Validators.required, Validators.email]),
@@ -33,8 +37,18 @@ export class LoginFormComponent {
   });
 
   onSubmit(): void {
-    if (this.loginFormGroup.valid) {
-      console.log('Form submitted:', this.loginFormGroup.value);
-    }
+    if (this.loginFormGroup.invalid) return;
+
+    const { email, password } = this.loginFormGroup.getRawValue();
+
+    this.authService.login({ email, password }).subscribe({
+      next: (res) => {
+        this.authService.setSession(res);
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+      },
+    });
   }
 }
