@@ -1,0 +1,77 @@
+# Compiled output
+/dist
+/dist/
+/out-tsc
+/bazel-out
+build/
+target/
+**/target/**
+!**/src/main/**/build/
+!**/src/main/**/target/
+!**/src/test/**/build/
+!**/src/test/**/target/
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+testem.log
+/connect.lock
+/coverage
+/tmp
+/typings
+/__screenshots__/
+
+# Angular
+/.angular/cache
+src/environments
+
+# IDEs and editors
+### IntelliJ IDEA ###
+.idea
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.settings/
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/mcp.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+.history/*
+.sass-cache/
+.mvn/wrapper/maven-wrapper.jar
+*.sublime-workspace
+*.launch
+.c9/
+/libpeerconnection.log
+
+# Secrets
+src/main/resources/env.properties
+
+# Docs
+HELP.md
