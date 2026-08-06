@@ -61,10 +61,10 @@ public class AuthServiceImpl implements AuthService {
 
         Set<Role> roles = user.getRoles();
 
-        String token = Jwts.builder()
-                .setSubject(user.getEmail())
-                .claim("roles", roles)
-                .setIssuedAt(new Date())
+String token = Jwts.builder()
+        .setSubject(user.getEmail())
+        .claim("roles", roles.stream().map(r -> r.getName().name()).toList())
+        .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getSigningKey())
                 .compact();
@@ -73,10 +73,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserResponse register(UserRequest request) {
-        if(userRepository.findByUsernameOrEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email or Username is already in use");
-        }
+if (userRepository.findByUsername(request.getUsername()).isPresent()
+        || userRepository.findByUsernameOrEmail(request.getEmail()).isPresent()) {
+    throw new RuntimeException("Email or Username is already in use");
+}
 
         User user = User.builder()
                 .username(request.getUsername())
