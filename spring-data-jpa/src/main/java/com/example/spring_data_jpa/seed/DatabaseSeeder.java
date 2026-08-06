@@ -48,9 +48,8 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         Role userRole = roleRepository.findByName(Role.Name.USER).orElseThrow(() -> new RuntimeException("User role not found"));
 
-        List<User> users = UserFactory.createMany(30);
-        users.forEach(u -> u.setRoles(Set.of(userRole)));
-        
+List<User> users = UserFactory.createMany(30);
+users.forEach(u -> u.setRoles(new java.util.HashSet<>(java.util.Set.of(userRole))));
         userRepository.saveAll(users);
         System.out.println("DatabaseSeeder: Seeded with 30 users.");
     }
