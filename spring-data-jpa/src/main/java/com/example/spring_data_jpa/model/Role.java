@@ -28,6 +28,7 @@ public class Role {
     @Column(nullable = false, unique = true, length = 20)
     private Name name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+@com.fasterxml.jackson.annotation.JsonIgnore
+@ManyToMany(mappedBy = "roles")
+private Set<User> users;
 }
