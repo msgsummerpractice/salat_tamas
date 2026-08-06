@@ -1,5 +1,7 @@
 package com.example.spring_data_jpa.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,9 +15,12 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     
-    User findByUsernameOrEmail(String username, String email);
-
     User getById(Long id);
+
+    Optional<User> findByUsername(String username);
+
+    @Query("SELECT u FROM User u WHERE u.username = :login OR u.email = :login")
+    Optional<User> findByUsernameOrEmail(@Param("login") String login);
         
     void deleteByUsername(String username);
 

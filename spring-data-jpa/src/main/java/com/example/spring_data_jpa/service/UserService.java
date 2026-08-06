@@ -68,7 +68,9 @@ public class UserService {
     }
 
     public UserResponse getUserByUsernameOrEmail(String username, String email) {
-        return convertToResponse(userRepository.findByUsernameOrEmail(username, email));
+        User user = userRepository.findByUsernameOrEmail(username).orElseThrow(
+            () -> new RuntimeException("User not found with username: " + username + " or email: " + email));
+        return convertToResponse(user);
     }
 
     public UserResponse createUser(User user) {
@@ -123,7 +125,7 @@ public class UserService {
         return userRepository.getLastnameById(id);
     }
 
-    private UserResponse convertToResponse(User user) {
+    protected UserResponse convertToResponse(User user) {
         UserResponse response = new UserResponse();
         response.setId(user.getId());
         response.setUsername(user.getUsername());
