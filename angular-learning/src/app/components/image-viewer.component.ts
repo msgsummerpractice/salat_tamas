@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { Subscription, finalize } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,8 +16,7 @@ export class ImageViewerComponent implements OnDestroy {
   private sub?: Subscription;
   loading = signal(false);
   error = signal<string | null>(null);
-
-  constructor(private imageService: ImageService) {}
+  imageService = inject(ImageService);
 
   loadImage() {
     this.sub?.unsubscribe();
