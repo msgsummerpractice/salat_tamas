@@ -73,10 +73,11 @@ String token = Jwts.builder()
     }
 
     @Override
-if (userRepository.findByUsername(request.getUsername()).isPresent()
-        || userRepository.findByUsernameOrEmail(request.getEmail()).isPresent()) {
-    throw new RuntimeException("Email or Username is already in use");
-}
+    public UserResponse register(UserRequest request) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()
+                || userRepository.findByUsernameOrEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email or Username is already in use");
+        }
 
         User user = User.builder()
                 .username(request.getUsername())
