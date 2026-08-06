@@ -31,7 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       <div class="flex flex-col items-center justify-center gap-4">
         @if (imageUrl() && !loading()) {
           <div>
-            <img [src]="imageUrl()" alt="Random" dog image />
+            <img [src]="imageUrl()" alt="Random dog image" />
           </div>
         }
 
