@@ -9,6 +9,8 @@ import { SignInRequest, SignInResponse, UserRequest, UserResponse } from '../mod
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
+  private baseUrl =
+    'https://salatt-backend-container-app.purpledesert-6358404e.germanywestcentral.azurecontainerapps.io';
 
   token = signal<string | null>(localStorage.getItem('token'));
   roles = signal<string | null>(localStorage.getItem('roles'));
@@ -17,7 +19,7 @@ export class AuthService {
   isAdmin = computed(() => this.roles()?.includes('ADMIN') ?? false);
 
   login(request: SignInRequest) {
-    return this.http.post<SignInResponse>('/api/auth/login', request);
+    return this.http.post<SignInResponse>(`${this.baseUrl}/api/auth/login`, request);
   }
 
   setSession(res: SignInResponse) {
@@ -31,7 +33,7 @@ export class AuthService {
   }
 
   register(request: UserRequest) {
-    return this.http.post<UserResponse>('/api/auth/register', request);
+    return this.http.post<UserResponse>(`${this.baseUrl}/api/auth/register`, request);
   }
 
   logout() {
